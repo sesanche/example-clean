@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/participantes")
-public class participantesEndpoint {
+public class ParticipantesEndpoint {
 
     @Autowired
     private ObtenerParticipantesUseCases obtenerParticipantesUseCases;
