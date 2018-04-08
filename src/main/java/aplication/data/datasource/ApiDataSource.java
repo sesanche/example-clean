@@ -1,20 +1,20 @@
 package aplication.data.datasource;
 
+import aplication.data.api.Api;
 import aplication.data.entity.ParticitanteEntity;
-import aplication.data.local.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("localDataSource")
-public class LocalDataSource implements Datasource {
+@Qualifier("apiDataSource")
+public class ApiDataSource implements Datasource {
 
     @Autowired
-    private Local participantesLocal;
+    private Api participantApi;
 
     @Override
     public ParticitanteEntity obtenerPartcipante(String rut) {
-        return participantesLocal.obtenerPartcipante(rut);
+        return participantApi.obtenerPartcipante(rut);
     }
 }

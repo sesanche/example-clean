@@ -1,7 +1,7 @@
 package aplication.data.repository;
 
 import aplication.data.datasource.Datasource;
-import aplication.data.factory.FactoryDataSource;
+import aplication.data.factory.FactoryDataSourceApi;
 import aplication.data.mapper.ParticipanteModelToEntity;
 import aplication.domain.model.ParticipanteModel;
 import org.springframework.stereotype.Component;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class RepositoryParticipante implements Repository {
 
-    private Datasource localDataSource;
+    private Datasource apiDataSource;
 
-    public RepositoryParticipante(FactoryDataSource factoryLocal) {
-        this.localDataSource = factoryLocal.crearDataSource();
+    public RepositoryParticipante(FactoryDataSourceApi factoryApi) {
+        this.apiDataSource = factoryApi.crearDataSource();
     }
 
     @Override
     public ParticipanteModel obtenerParticipante(String rut) {
-        return ParticipanteModelToEntity.reverse(localDataSource.obtenerPartcipante(rut));
+        return ParticipanteModelToEntity.reverse(apiDataSource.obtenerPartcipante(rut));
     }
 }
