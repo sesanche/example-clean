@@ -5,8 +5,6 @@ import aplication.data.local.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class LocalDataSource implements Datasource {
 
@@ -14,7 +12,7 @@ public class LocalDataSource implements Datasource {
     private Local participantesLocal;
 
     @Override
-    public List<ParticitanteEntity> obtenerPartcipantes() {
-        return participantesLocal.obtenerPartcipantes();
+    public ParticitanteEntity obtenerPartcipante(String rut) {
+        return participantesLocal.obtenerPartcipante(rut);
     }
 }

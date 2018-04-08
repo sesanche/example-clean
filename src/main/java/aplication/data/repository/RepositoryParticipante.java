@@ -1,24 +1,22 @@
 package aplication.data.repository;
 
 import aplication.data.datasource.Datasource;
-import aplication.data.factory.FactoryLocal;
+import aplication.data.factory.FactoryDataSource;
 import aplication.data.mapper.ParticipanteModelToEntity;
 import aplication.domain.model.ParticipanteModel;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class RepositoryLocal implements Repository{
+public class RepositoryParticipante implements Repository {
 
     private Datasource localDataSource;
 
-    public RepositoryLocal(FactoryLocal factoryLocal) {
+    public RepositoryParticipante(FactoryDataSource factoryLocal) {
         this.localDataSource = factoryLocal.crearDataSource();
     }
 
     @Override
-    public List<ParticipanteModel> obtenerParticipantes() {
-        return ParticipanteModelToEntity.reverse(localDataSource.obtenerPartcipantes());
+    public ParticipanteModel obtenerParticipante(String rut) {
+        return ParticipanteModelToEntity.reverse(localDataSource.obtenerPartcipante(rut));
     }
 }

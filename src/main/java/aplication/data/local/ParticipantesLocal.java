@@ -3,15 +3,24 @@ package aplication.data.local;
 import aplication.data.entity.ParticitanteEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class ParticipantesLocal implements Local {
+    private Map<String, ParticitanteEntity> participantes;
 
     @Override
-    public List<ParticitanteEntity> obtenerPartcipantes() {
-        List participantes = new ArrayList();
+    public ParticitanteEntity obtenerPartcipante(String rut) {
+        CargarParticipantes();
+        return participantes.get(rut);
+    }
+
+    private void CargarParticipantes() {
+        if (participantes == null) {
+            participantes = new HashMap<>();
+        }
+
         ParticitanteEntity particitanteEntityUno = new ParticitanteEntity();
         particitanteEntityUno.setNombre("Ileyn Avalos");
 
@@ -24,12 +33,9 @@ public class ParticipantesLocal implements Local {
         ParticitanteEntity particitanteEntityCuatro = new ParticitanteEntity();
         particitanteEntityCuatro.setNombre("Nadia Poniatowsky");
 
-        participantes.add(particitanteEntityUno);
-        participantes.add(particitanteEntityDos);
-        participantes.add(particitanteEntityTres);
-        participantes.add(particitanteEntityCuatro);
-
-
-        return participantes;
+        participantes.put("1-0", particitanteEntityUno);
+        participantes.put("2-0", particitanteEntityDos);
+        participantes.put("3-0", particitanteEntityTres);
+        participantes.put("4-0", particitanteEntityCuatro);
     }
 }
