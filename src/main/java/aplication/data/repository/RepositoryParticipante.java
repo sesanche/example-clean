@@ -8,6 +8,8 @@ import aplication.data.mapper.ParticipanteModelToEntity;
 import aplication.domain.model.ParticipanteModel;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class RepositoryParticipante implements Repository {
 
@@ -22,11 +24,17 @@ public class RepositoryParticipante implements Repository {
 
     @Override
     public ParticipanteModel obtenerParticipante(String rut) {
-        ParticipanteModel participanteModel = ParticipanteModelToEntity.reverse(localDataSource.obtenerPartcipante(rut));
+        ParticipanteModel participanteModel = ParticipanteModelToEntity.reverse(localDataSource.obtenerParticipante(rut));
         if (participanteModel.getNombre() == null) {
             participanteModel = ParticipanteModelToEntity.reverse(apiDataSource.obtenerPartcipante(rut));
             localDataSource.agregarPartcipante(apiDataSource.obtenerPartcipante(rut));
         }
         return participanteModel;
     }
+
+    @Override
+    public List<ParticipanteModel> obtenerParticipantes() {
+        return ParticipanteModelToEntity.reverse(localDataSource.obtenerParticipantes());
+    }
+
 }

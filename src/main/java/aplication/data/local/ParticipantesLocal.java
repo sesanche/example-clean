@@ -3,7 +3,9 @@ package aplication.data.local;
 import aplication.data.entity.ParticitanteEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -19,6 +21,11 @@ public class ParticipantesLocal implements Local {
     @Override
     public void agregarparticipante(ParticitanteEntity participante) {
         participantes.put(participante.getRut(), participante);
+    }
+
+    @Override
+    public List<ParticitanteEntity> obtenerParticipantes() {
+        return new ArrayList<>(participantes.values());
     }
 
     private ParticitanteEntity getParticitanteEntity(String rut) {
