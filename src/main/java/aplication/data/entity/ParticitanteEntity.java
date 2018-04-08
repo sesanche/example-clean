@@ -9,4 +9,7 @@ import lombok.Data;
 public class ParticitanteEntity {
     @JsonProperty("name")
     private String nombre;
+
+    @JsonProperty("rut")
+    private String rut;
 }

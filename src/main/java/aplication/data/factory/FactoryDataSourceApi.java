@@ -1,19 +1,17 @@
 package aplication.data.factory;
 
-import aplication.data.datasource.Datasource;
+import aplication.data.datasource.ApiGetDatasource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FactoryDataSourceApi implements Factory<Datasource> {
+public class FactoryDataSourceApi implements Factory<ApiGetDatasource> {
 
     @Autowired
-    @Qualifier("apiDataSource")
-    private Datasource apiDataSource;
+    private ApiGetDatasource apiDataSource;
 
     @Override
-    public Datasource crearDataSource() {
+    public ApiGetDatasource crearDataSource() {
         return apiDataSource;
     }
 }

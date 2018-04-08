@@ -8,34 +8,46 @@ import java.util.Map;
 
 @Component
 public class ParticipantesLocal implements Local {
-    private Map<String, ParticitanteEntity> participantes;
+    private Map<String, ParticitanteEntity> participantes = new HashMap<>();
 
     @Override
-    public ParticitanteEntity obtenerPartcipante(String rut) {
+    public ParticitanteEntity obtenerParticipante(String rut) {
         CargarParticipantes();
-        return participantes.get(rut);
+        return getParticitanteEntity(rut);
+    }
+
+    @Override
+    public void agregarparticipante(ParticitanteEntity participante) {
+        participantes.put(participante.getRut(), participante);
+    }
+
+    private ParticitanteEntity getParticitanteEntity(String rut) {
+        if (participantes.containsKey(rut)) {
+            return participantes.get(rut);
+        }
+        return new ParticitanteEntity();
     }
 
     private void CargarParticipantes() {
-        if (participantes == null) {
-            participantes = new HashMap<>();
-        }
-
         ParticitanteEntity particitanteEntityUno = new ParticitanteEntity();
         particitanteEntityUno.setNombre("Ileyn Avalos");
+        particitanteEntityUno.setRut("1-0");
 
         ParticitanteEntity particitanteEntityDos = new ParticitanteEntity();
         particitanteEntityDos.setNombre("Constanza Salinas");
+        particitanteEntityDos.setRut("2-0");
 
         ParticitanteEntity particitanteEntityTres = new ParticitanteEntity();
         particitanteEntityTres.setNombre("Luis Avalos");
+        particitanteEntityTres.setRut("3-0");
 
         ParticitanteEntity particitanteEntityCuatro = new ParticitanteEntity();
         particitanteEntityCuatro.setNombre("Nadia Poniatowsky");
+        particitanteEntityCuatro.setRut("4-0");
 
-        participantes.put("1-0", particitanteEntityUno);
-        participantes.put("2-0", particitanteEntityDos);
-        participantes.put("3-0", particitanteEntityTres);
-        participantes.put("4-0", particitanteEntityCuatro);
+        agregarparticipante(particitanteEntityUno);
+        agregarparticipante(particitanteEntityDos);
+        agregarparticipante(particitanteEntityTres);
+        agregarparticipante(particitanteEntityCuatro);
     }
 }

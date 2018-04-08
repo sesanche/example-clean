@@ -1,19 +1,17 @@
 package aplication.data.factory;
 
-import aplication.data.datasource.Datasource;
+import aplication.data.datasource.LocalManagerDatasource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FactoryDataSourceLocal implements Factory<Datasource> {
+public class FactoryDataSourceLocal implements Factory<LocalManagerDatasource> {
 
     @Autowired
-    @Qualifier("localDataSource")
-    private Datasource localDataSource;
+    private LocalManagerDatasource localDataSource;
 
     @Override
-    public Datasource crearDataSource() {
+    public LocalManagerDatasource crearDataSource() {
         return localDataSource;
     }
 }
