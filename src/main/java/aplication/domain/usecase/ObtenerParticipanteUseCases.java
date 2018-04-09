@@ -13,7 +13,11 @@ public class ObtenerParticipanteUseCases {
     @Autowired
     private Repository repositoryParticipantes;
 
+    @Autowired
+    private ValidarRutUseCase validarRutUseCase;
+
     public ParticipanteModel obtenerParticipante(String rut) {
+        validarRutUseCase.validar(rut);
         return repositoryParticipantes.obtenerParticipante(rut);
     }
 
