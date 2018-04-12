@@ -4,13 +4,27 @@ import aplication.data.repository.Repository;
 import aplication.data.repository.RepositoryParticipante;
 import aplication.domain.model.ParticipanteModel;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
+@RunWith(MockitoJUnitRunner.class)
 public class ObtenerParticipanteUseCasesTest {
 
+    @Mock
+    private Repository repository;
+
+    @Mock
+    private ValidarRutUseCase validarRut;
+
+    @InjectMocks
+    private ObtenerParticipanteUseCases obtenerParticipanteUseCases  = new ObtenerParticipanteUseCases();
 
     @Test
     public void DeberiaDevolverParticipanteModelConNombreCorrectoCuandoSePasaRutValido(){
@@ -18,22 +32,10 @@ public class ObtenerParticipanteUseCasesTest {
         ParticipanteModel participanteModelEsperado = new ParticipanteModel();
         ParticipanteModel participanteModelResp;
         String rutValido = "14354986-0";
-
         participanteModelEsperado.setNombre("sanchez reyes sergio alejandro");
 
-        //mock del repositorio (consulta la API)
-        Repository repository = mock(RepositoryParticipante.class);
         when(repository.obtenerParticipante(rutValido)).thenReturn(participanteModelEsperado);
-
-        //mock de la validacion del rut
-        ValidarRutUseCase validarRut = mock(ValidarRutUseCase.class);
         when(validarRut.validar(rutValido)).thenReturn(true);
-
-
-        //buscar como hace sin los set, utilizar mock, @runner mirando la libreria
-        ObtenerParticipanteUseCases obtenerParticipanteUseCases = new ObtenerParticipanteUseCases();
-        obtenerParticipanteUseCases.setValidarRutUseCase(validarRut);
-        obtenerParticipanteUseCases.setRepositoryParticipantes(repository);
 
         //act
 
@@ -61,11 +63,6 @@ public class ObtenerParticipanteUseCasesTest {
         //mock de la validacion del rut
         ValidarRutUseCase validarRut = mock(ValidarRutUseCase.class);
         when(validarRut.validar(rutNoValido)).thenReturn(false);
-
-        //buscar como hace sin los set, utilizar mock, @runner mirando la libreria
-        ObtenerParticipanteUseCases obtenerParticipanteUseCases = new ObtenerParticipanteUseCases();
-        obtenerParticipanteUseCases.setValidarRutUseCase(validarRut);
-        obtenerParticipanteUseCases.setRepositoryParticipantes(repository);
 
         //act
 

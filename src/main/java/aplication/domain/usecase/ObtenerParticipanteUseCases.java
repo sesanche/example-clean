@@ -10,10 +10,6 @@ import java.util.List;
 @Component
 public class ObtenerParticipanteUseCases {
 
-    public void setRepositoryParticipantes(Repository repositoryParticipantes) {
-        this.repositoryParticipantes = repositoryParticipantes;
-    }
-
     @Autowired
     private Repository repositoryParticipantes;
 
@@ -36,7 +32,4 @@ public class ObtenerParticipanteUseCases {
         return repositoryParticipantes.obtenerParticipantes();
     }
 
-    public void setValidarRutUseCase(ValidarRutUseCase validarRutUseCase) {
-        this.validarRutUseCase = validarRutUseCase;
-    }
 }
