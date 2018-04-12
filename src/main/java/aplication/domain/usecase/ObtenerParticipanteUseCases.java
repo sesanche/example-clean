@@ -10,6 +10,10 @@ import java.util.List;
 @Component
 public class ObtenerParticipanteUseCases {
 
+    public void setRepositoryParticipantes(Repository repositoryParticipantes) {
+        this.repositoryParticipantes = repositoryParticipantes;
+    }
+
     @Autowired
     private Repository repositoryParticipantes;
 
@@ -17,13 +21,22 @@ public class ObtenerParticipanteUseCases {
     private ValidarRutUseCase validarRutUseCase;
 
     public ParticipanteModel obtenerParticipante(String rut) {
-        validarRutUseCase.validar(rut);
-        return repositoryParticipantes.obtenerParticipante(rut);
+        if (validarRutUseCase.validar(rut)) {
+            return repositoryParticipantes.obtenerParticipante(rut);
+        }
+        else {
+            ParticipanteModel participanteModel = new ParticipanteModel();
+            participanteModel.setNombre("Rut Invalido");
+            return participanteModel;
+        }
+
     }
 
     public List<ParticipanteModel> obtenerParticipantes() {
         return repositoryParticipantes.obtenerParticipantes();
     }
 
-
+    public void setValidarRutUseCase(ValidarRutUseCase validarRutUseCase) {
+        this.validarRutUseCase = validarRutUseCase;
+    }
 }

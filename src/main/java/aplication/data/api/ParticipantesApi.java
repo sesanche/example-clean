@@ -27,7 +27,11 @@ public class ParticipantesApi implements Api {
     private ParticitanteEntity getParticitanteEntity(ParticitanteEntity[] responseApiArray) {
         List<ParticitanteEntity> listParticitanteEntity = Arrays.asList(responseApiArray);
         if (listParticitanteEntity.isEmpty()) {
-            return new ParticitanteEntity();
+            ParticitanteEntity particitanteEntityResponse = new ParticitanteEntity();
+            particitanteEntityResponse.setRut("");
+            particitanteEntityResponse.setNombre("No encontrado");
+            return particitanteEntityResponse;
+
         }
         return listParticitanteEntity.get(0);
     }

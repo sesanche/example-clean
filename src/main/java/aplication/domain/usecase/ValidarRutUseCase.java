@@ -10,9 +10,15 @@ public class ValidarRutUseCase {
             throw new IllegalArgumentException("El rut es invalido");
         }
 
-        if (!rut.matches("^\\d{1,3}[.]?\\d{1,3}[.]?\\d{1,3}-(\\d|k|K){1}$")){
+
+        if (!rut.matches("^\\d{0,3}[.]?\\d{0,3}[.]?\\d{1,3}-(\\d|k|K){1}$")){
             return false;
         }
+
+        if (rut.length() > 5 && !rut.matches("^\\d{0,3}[.]?\\d{1,3}[.]?\\d{3}-(\\d|k|K){1}$")){
+            return false;
+        }
+
 
         String [] temprut = rut.split("-");
         temprut[0] = temprut[0].replaceAll("[.]", "");

@@ -39,8 +39,43 @@ public class ValidarRutUseCaseTest {
 
         //act and assert
         assertTrue (validarRutUseCase.validar(rutValido));
+    }
+
+
+    @Test
+    public void deberiaDevolverTrueCuandoElRutEsValidoPeroInexistente(){
+        //arrange
+        ValidarRutUseCase validarRutUseCase = new ValidarRutUseCase();
+        String rutValidoInexistente = "1-9";
+
+        //act and assert
+        assertTrue (validarRutUseCase.validar(rutValidoInexistente));
 
     }
+
+
+    @Test
+    public void deberiaDevolverFalseCuandoPasaPuntoDecimal(){
+        //arrange
+        ValidarRutUseCase validarRutUseCase = new ValidarRutUseCase();
+        String rutNocompletadecimales = "143.549.86-0";
+
+        //act and assert
+        assertFalse (validarRutUseCase.validar(rutNocompletadecimales));
+
+    }
+
+    @Test
+    public void deberiaDevolverFalseCuandoSoloPasaDV(){
+        //arrange
+        ValidarRutUseCase validarRutUseCase = new ValidarRutUseCase();
+        String rutsoloDV = "-0";
+
+        //act and assert
+        assertFalse (validarRutUseCase.validar(rutsoloDV));
+
+    }
+
 
     @Test
     public void deberiaDevolverFalseCuandoElRutNoCumpleModuloOnce(){
@@ -71,6 +106,17 @@ public class ValidarRutUseCaseTest {
         //act and assert
         assertFalse (validarRutUseCase.validar(rutConLetrasAntesDelGuion));
     }
+
+    @Test
+    public void deberiaDevolverFalseCuandoElDVNoEsUnValorPermitido(){
+        //arrange
+        ValidarRutUseCase validarRutUseCase = new ValidarRutUseCase();
+        String rutConDVFueraDeFormato = "14354986-A";
+
+        //act and assert
+        assertFalse (validarRutUseCase.validar(rutConDVFueraDeFormato));
+    }
+
 
     @Test
     public void deberiaDevolverTrueCuandoElRutContienePuntosAcordeAFormato(){
